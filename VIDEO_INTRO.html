@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Reimburse — 90-second intro</title>
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<style>
+  :root {
+    --brand: #0052cc;
+    --brand-2: #0065ff;
+    --ink-900: #172b4d;
+    --ink-700: #253858;
+    --ink-500: #42526e;
+    --ink-300: #6b778c;
+    --ink-100: #7a869a;
+    --bg-40: #dfe1e6;
+    --bg-20: #f4f5f7;
+    --bg-10: #fafbfc;
+    --success: #00875a;
+    --warn: #ff8b00;
+    --danger: #de350b;
+    --purple: #5243aa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-family: 'Inter var', 'Inter', system-ui, sans-serif; font-feature-settings: 'cv02','cv03','cv04','cv11'; }
+  body {
+    background: linear-gradient(180deg, #f4f5f7 0%, #ebecf0 100%);
+    color: var(--ink-900);
+    min-height: 100vh;
+    padding: 40px 20px;
+    line-height: 1.5;
+  }
+  .stage { max-width: 1200px; margin: 0 auto; }
+  header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
+  }
+  .logo {
+    width: 44px; height: 44px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--brand-2), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 22px;
+  }
+  .brand h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .brand .tag { font-size: 11px; color: var(--ink-300); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card {
+    background: white; border: 1px solid var(--bg-40); border-radius: 8px;
+    padding: 20px 22px;
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .section-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-100); margin-bottom: 8px;
+  }
+  h2 { font-size: 17px; font-weight: 700; color: var(--ink-900); margin-bottom: 10px; letter-spacing: -0.005em; }
+  h3 { font-size: 13px; font-weight: 700; color: var(--ink-700); margin: 10px 0 6px; }
+  p { font-size: 13.5px; color: var(--ink-500); }
+  ul { list-style: none; padding: 0; }
+  li { font-size: 13px; color: var(--ink-500); padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; }
+  li::before { content: "▸"; color: var(--brand); font-weight: 700; flex-shrink: 0; }
+  .pill {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 3px; margin-right: 4px;
+  }
+  .pill.blue { background: #deebff; color: var(--brand); }
+  .pill.green { background: #e3fcef; color: var(--success); }
+  .pill.orange { background: #fffae6; color: var(--warn); }
+  .pill.red { background: #ffebe6; color: var(--danger); }
+  .pill.purple { background: #eae6ff; color: var(--purple); }
+
+  /* Problem/Policy in top row */
+  .problem-card { border-left: 4px solid var(--danger); }
+  .policy-card { border-left: 4px solid var(--brand); }
+  .aim-card { border-left: 4px solid var(--success); background: linear-gradient(135deg, #e3fcef, white); }
+  .stack-card { border-left: 4px solid var(--purple); }
+
+  .aim { font-size: 20px; font-weight: 700; color: var(--ink-900); line-height: 1.35; }
+  .aim em { color: var(--brand); font-style: normal; }
+  .aim-sub { font-size: 12px; color: var(--ink-300); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+  /* Architecture diagram */
+  .arch {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+    padding: 12px 0; align-items: stretch;
+  }
+  .node {
+    background: white; border: 1.5px solid var(--bg-40); border-radius: 6px;
+    padding: 10px 12px; position: relative; text-align: center;
+  }
+  .node .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-100); }
+  .node .name { font-size: 14px; font-weight: 700; color: var(--ink-900); margin-top: 2px; }
+  .node .sub { font-size: 11px; color: var(--ink-300); margin-top: 3px; line-height: 1.3; }
+  .node.frontend { background: linear-gradient(135deg, #deebff, white); border-color: var(--brand); }
+  .node.backend { background: linear-gradient(135deg, #e3fcef, white); border-color: var(--success); }
+  .node.db { background: linear-gradient(135deg, #eae6ff, white); border-color: var(--purple); }
+  .node.llm { background: linear-gradient(135deg, #fffae6, white); border-color: var(--warn); grid-column: 2; margin-top: 8px; }
+  .arrow-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -6px 0; font-size: 10px; color: var(--ink-100); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin-top: 8px; }
+  .stack-item { font-size: 12px; color: var(--ink-500); padding: 4px 0; border-bottom: 1px dashed var(--bg-40); }
+  .stack-item strong { color: var(--ink-900); font-weight: 700; }
+
+  .features li { padding: 5px 0; font-size: 13.5px; }
+  .features li::before { content: "✓"; color: var(--success); }
+  .features li strong { color: var(--ink-900); font-weight: 600; margin-right: 4px; }
+
+  footer {
+    margin-top: 22px; text-align: center; font-size: 11px; color: var(--ink-100);
+  }
+  footer strong { color: var(--ink-500); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header>
+    <div class="logo">R</div>
+    <div class="brand">
+      <h1>Reimburse</h1>
+      <div class="tag">Take-home for AI Planet · Nortex Industries brief</div>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- PROBLEM -->
+    <div class="card problem-card">
+      <div class="section-label">The problem</div>
+      <h2>Every travelling employee loses 25–30 minutes per trip to a paper-form ritual</h2>
+      <p style="margin-top:6px">Chaitanya returns from a Bengaluru trip. His inbox has 15 emails: Uber receipts, a hotel folio, a duplicate resend, a colleague's expense forwarded to him, a promo, a payment failure notice, a flight ticket paid by the company card. He opens a blank Excel form and manually assembles a claim. Then chases Finance for 2 weeks.</p>
+      <ul style="margin-top:10px">
+        <li>Manual assembly from a messy inbox — <strong style="color:var(--ink-900)">the 25 minutes</strong></li>
+        <li>Errors leak through — non-reimbursables get claimed, duplicates get paid</li>
+        <li>Silent workflow — nobody knows where the money is until it arrives</li>
+      </ul>
+    </div>
+
+    <!-- POLICY -->
+    <div class="card policy-card">
+      <div class="section-label">The policy the app must enforce</div>
+      <h2>NTX-HR-POL-11 Rev 4 · effective 01 Apr 2026</h2>
+      <div style="margin-top:8px; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:12.5px">
+        <div><strong>Lodging</strong> — Tier‑1 ₹6k / Tier‑2 ₹4k / Tier‑3 ₹2.8k per night</div>
+        <div><strong>Meals</strong> — Tier‑1 ₹1.5k / others ₹1k per day</div>
+        <div><strong>Advance</strong> — up to <strong style="color:var(--danger)">60% cap</strong> of estimated cost</div>
+        <div><strong>Business meals</strong> — <strong>&gt;₹2k needs HoD approval</strong></div>
+        <div style="grid-column:1/-1; margin-top:4px"><strong>Non‑reimbursable</strong> — laundry, mini‑bar, spa, gym, alcohol, personal phone, fines, insurance</div>
+      </div>
+      <h3 style="margin-top:12px">Approval matrix (by amount)</h3>
+      <div style="display:grid; grid-template-columns:auto 1fr; gap:2px 12px; font-size:12px; margin-top:4px">
+        <div><span class="pill green">≤ ₹25k</span></div><div style="color:var(--ink-500)">Reporting Manager</div>
+        <div><span class="pill blue">₹25k–75k</span></div><div style="color:var(--ink-500)">Manager + HoD</div>
+        <div><span class="pill orange">₹75k–2L</span></div><div style="color:var(--ink-500)">Manager + HoD + Division Head</div>
+        <div><span class="pill red">&gt; ₹2L / intl</span></div><div style="color:var(--ink-500)">Manager + HoD + Div Head + MD/CEO</div>
+      </div>
+    </div>
+
+    <!-- PRIMARY AIM -->
+    <div class="card aim-card wide">
+      <div class="section-label">Primary aim</div>
+      <div class="aim">
+        Remove the 25 minutes. Enforce the policy automatically. Give every rupee a live audit trail — from advance disbursement to final settlement, visible to everyone who needs it.
+      </div>
+      <div class="aim-sub">Build for the messy inbox, not a cleaner form.</div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="card wide">
+      <div class="section-label">Must-have features</div>
+      <h2>What the app does end-to-end</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px 24px; margin-top:8px">
+        <ul class="features">
+          <li><strong>Import from Inbox</strong> — parses .eml files, filters noise, splits hotel folios</li>
+          <li><strong>Deterministic parsers</strong> for Uber, MakeMyTrip, hotel invoices</li>
+          <li><strong>LLM fallback</strong> via OpenRouter for unknown senders</li>
+          <li><strong>Policy engine</strong> — lodging caps + non-reimbursables at save-time</li>
+          <li><strong>Two-stage approval</strong> — TR pre-trip, Claim post-trip</li>
+          <li><strong>Tiered approvals</strong> per policy §2 (Manager → HoD → Div → MD)</li>
+        </ul>
+        <ul class="features">
+          <li><strong>AI Verification Assistant</strong> — advisor for approvers, never auto-decides</li>
+          <li><strong>Employee Context panel</strong> — past history, plan-vs-actual for reviewers</li>
+          <li><strong>Advance disbursement audit</strong> as a distinct Finance sub-tree</li>
+          <li><strong>Finance ↔ Employee thread</strong> when an advance is held</li>
+          <li><strong>Proof document viewer</strong> — inline .png / .pdf / .eml rendering</li>
+          <li><strong>Admin oversight</strong> — policy view, org tree, system stats</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="card wide">
+      <div class="section-label">Architecture</div>
+      <h2>System overview</h2>
+      <div class="arch">
+        <div class="node frontend">
+          <div class="label">Client</div>
+          <div class="name">React SPA</div>
+          <div class="sub">Tailwind · Inter font · role-scoped dashboards<br>Deployed on Vercel</div>
+        </div>
+        <div class="node backend">
+          <div class="label">API</div>
+          <div class="name">Django + DRF</div>
+          <div class="sub">Token auth · role-scoped querysets<br>Deployed on Railway (gunicorn + whitenoise)</div>
+        </div>
+        <div class="node db">
+          <div class="label">Data</div>
+          <div class="name">PostgreSQL</div>
+          <div class="sub">SQLite in dev · switch via DATABASE_URL<br>Managed on Railway</div>
+        </div>
+      </div>
+      <div class="arrow-row">← REST JSON over HTTPS →   ·   ORM →</div>
+      <div class="arch" style="grid-template-columns:1fr">
+        <div class="node llm" style="grid-column:1; margin-top:0">
+          <div class="label">AI integration</div>
+          <div class="name">OpenRouter (multi-model)</div>
+          <div class="sub">DeepSeek V4 Flash primary · openrouter/free fallback · rule-based fallback if LLM down</div>
+        </div>
+      </div>
+      <p style="margin-top:12px; font-size:12.5px">
+        <strong style="color:var(--ink-900)">Design principle:</strong> the shape of the code mirrors product thinking.
+        <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">core/parsers.py</code> is a first-class file (not buried in <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">utils/</code>) because reading the inbox <em>is</em> the product.
+        <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">core/llm.py</code> is separate from <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">views.py</code> because AI is an integration, not the core.
+      </p>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="card stack-card wide">
+      <div class="section-label">Tech stack & why over the alternatives</div>
+      <div class="stack-grid">
+        <div class="stack-item"><strong>Django + DRF</strong> — fastest way to expose a domain with role-based permissions. <span style="color:var(--ink-300)">Not Node/Express: DRF's viewsets + queryset-level RBAC compress a week of Node scaffolding into a day.</span></div>
+        <div class="stack-item"><strong>React + Tailwind</strong> — component reuse, dense enterprise UI. <span style="color:var(--ink-300)">Not Next.js: no SSR needed; this is an internal tool, not a public site.</span></div>
+        <div class="stack-item"><strong>OpenRouter (LLM)</strong> — multi-model with fallback. <span style="color:var(--ink-300)">Not direct OpenAI/Anthropic SDK: OpenRouter lets me swap models without code changes.</span></div>
+        <div class="stack-item"><strong>PostgreSQL via DATABASE_URL</strong> — one-line dev-to-prod switch. <span style="color:var(--ink-300)">Not MongoDB: this is relational — approvals, hierarchies, joins.</span></div>
+        <div class="stack-item"><strong>Token auth (DRF)</strong> — bearer tokens, no CSRF/session complexity. <span style="color:var(--ink-300)">Not JWT: overkill; DRF's built-in Token is enough.</span></div>
+        <div class="stack-item"><strong>Inter font · Atlassian palette</strong> — financial-grade tabular numerals. <span style="color:var(--ink-300)">Not Material/Bootstrap: they feel like consumer apps, not enterprise SaaS.</span></div>
+        <div class="stack-item"><strong>Railway (backend)</strong> — auto-detects Django + Postgres. <span style="color:var(--ink-300)">Not AWS/Heroku: 30-min deploy from GitHub with zero YAML.</span></div>
+        <div class="stack-item"><strong>Vercel (frontend)</strong> — auto rebuilds on push. <span style="color:var(--ink-300)">Not Netlify: identical DX, Vercel just felt smoother for CRA.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Live: <strong>reimburse-frontend-eta.vercel.app</strong> · Backend: <strong>reimburse-backend-production.up.railway.app</strong><br>
+    Repos on GitHub: <strong>Naga-Balaji/reimburse-backend</strong> · <strong>Naga-Balaji/reimburse-frontend</strong>
+  </footer>
+
+</div>
+</body>
+</html>
