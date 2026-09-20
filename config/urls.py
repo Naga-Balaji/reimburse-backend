@@ -27,5 +27,8 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve uploaded proof files even in production.
+# For a real deployment, use S3/Cloudflare R2 + django-storages.
+# For this demo, Railway serves media directly. Ephemeral disk means files
+# reset on redeploy — acceptable for a demo, not for real use.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

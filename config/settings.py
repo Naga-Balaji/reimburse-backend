@@ -120,6 +120,12 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Trust Railway's proxy so Django knows the request came in over HTTPS.
+# Without this, request.build_absolute_uri() returns http:// URLs even
+# when the client used https://, breaking mixed-content on Vercel.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
 # Media files (uploaded proofs)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
