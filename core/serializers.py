@@ -38,10 +38,24 @@ class TravelRequestSerializer(serializers.ModelSerializer):
     advance_follow_up_by_name = serializers.CharField(source='advance_follow_up_by.get_full_name', read_only=True, allow_null=True)
     approvals_chain = TRApprovalSerializer(many=True, read_only=True)
     related_claim_id = serializers.SerializerMethodField()
+    pending_action_from_me = serializers.SerializerMethodField()
 
     def get_related_claim_id(self, obj):
         claim = obj.expense_claims.first()
         return claim.id if claim else None
+
+    def get_pending_action_from_me(self, obj):
+        """True if the current user is the next-in-line approver whose slot is still pending."""
+        request = self.context.get('request')
+        if not request or obj.status != 'pending':
+            return False
+        # Import here to avoid circular
+        from .views import _tr_get_user_level
+        my_level = _tr_get_user_level(request.user, obj)
+        if not my_level:
+            return False
+        my_slot = obj.approvals_chain.filter(level=my_level).first()
+        return bool(my_slot and my_slot.decision == 'pending')
 
     class Meta:
         model = TravelRequest
@@ -52,7 +66,7 @@ class TravelRequestSerializer(serializers.ModelSerializer):
             'advance_disbursed_by', 'advance_disbursed_by_name', 'advance_disbursement_ref',
             'advance_review_note', 'advance_review_at', 'advance_review_by', 'advance_review_by_name',
             'advance_follow_up_note', 'advance_follow_up_at', 'advance_follow_up_by', 'advance_follow_up_by_name',
-            'approvals_chain', 'related_claim_id',
+            'approvals_chain', 'related_claim_id', 'pending_action_from_me',
         ]
         read_only_fields = ['id', 'created_at', 'employee', 'advance_disbursed_by', 'advance_disbursed_at', 'advance_review_at', 'advance_review_by']
 
@@ -177,15 +191,36 @@ class ExpenseClaimSerializer(serializers.ModelSerializer):
     payable_recoverable = serializers.SerializerMethodField()
     approvals = serializers.SerializerMethodField()
     travel_request_detail = serializers.SerializerMethodField()
+    pending_action_from_me = serializers.SerializerMethodField()
 
     class Meta:
         model = ExpenseClaim
         fields = [
             'id', 'travel_request', 'travel_request_detail', 'employee', 'employee_name', 'travel_destination',
             'status', 'items', 'total_claimed', 'total_disallowed', 'net_reimbursable',
-            'advance_drawn', 'payable_recoverable', 'approvals', 'submitted_at', 'created_at'
+            'advance_drawn', 'payable_recoverable', 'approvals', 'submitted_at', 'created_at',
+            'pending_action_from_me',
         ]
         read_only_fields = ['id', 'created_at', 'employee']
+
+    def get_pending_action_from_me(self, obj):
+        """True if the current user is the next-in-line approver whose slot is still pending."""
+        request = self.context.get('request')
+        if not request or obj.status not in ('submitted', 'approved'):
+            return False
+        from .views import ExpenseClaimViewSet
+        try:
+            viewset = ExpenseClaimViewSet()
+            my_level = viewset._get_approval_level(request.user, obj)
+        except Exception:
+            return False
+        if not my_level:
+            return False
+        # Finance approves 'finance' level only when claim is fully approved
+        if my_level == 'finance' and obj.status != 'approved':
+            return False
+        my_slot = obj.approvals.filter(level=my_level).first()
+        return bool(my_slot and my_slot.decision == 'pending')
 
     def get_travel_request_detail(self, obj):
         tr = obj.travel_request
