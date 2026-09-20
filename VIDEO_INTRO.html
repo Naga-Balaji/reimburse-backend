@@ -2,251 +2,790 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Reimburse — 90-second intro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reimburse — the 90-second story</title>
 <link rel="preconnect" href="https://rsms.me/" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <style>
   :root {
+    --ink: #0a1a3a;
+    --ink-2: #172b4d;
+    --muted: #6b778c;
+    --muted-2: #7a869a;
+    --line: #dfe1e6;
+    --bg: #f7f8fa;
     --brand: #0052cc;
     --brand-2: #0065ff;
-    --ink-900: #172b4d;
-    --ink-700: #253858;
-    --ink-500: #42526e;
-    --ink-300: #6b778c;
-    --ink-100: #7a869a;
-    --bg-40: #dfe1e6;
-    --bg-20: #f4f5f7;
-    --bg-10: #fafbfc;
+    --brand-glow: #4c9aff;
+    --accent: #6554c0;
     --success: #00875a;
     --warn: #ff8b00;
     --danger: #de350b;
-    --purple: #5243aa;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-family: 'Inter var', 'Inter', system-ui, sans-serif; font-feature-settings: 'cv02','cv03','cv04','cv11'; }
-  body {
-    background: linear-gradient(180deg, #f4f5f7 0%, #ebecf0 100%);
-    color: var(--ink-900);
-    min-height: 100vh;
-    padding: 40px 20px;
-    line-height: 1.5;
+  html { font-family: 'Inter var', 'Inter', system-ui, sans-serif; font-feature-settings: 'cv02','cv03','cv04','cv11','ss01'; scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+
+  /* Utility */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); }
+  .eyebrow-light { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    background: radial-gradient(ellipse at 20% 20%, #1a2c5e 0%, #0a1428 40%, #050a1a 100%);
+    color: white; position: relative; overflow: hidden;
+    display: flex; align-items: center;
   }
-  .stage { max-width: 1200px; margin: 0 auto; }
-  header {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 32px;
+  .hero::before {
+    content: ""; position: absolute; top: -20%; right: -10%;
+    width: 60%; height: 80%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(76,154,255,0.25), transparent 60%);
+    filter: blur(60px);
   }
-  .logo {
-    width: 44px; height: 44px; border-radius: 8px;
-    background: linear-gradient(135deg, var(--brand-2), var(--purple));
+  .hero::after {
+    content: ""; position: absolute; bottom: -20%; left: -10%;
+    width: 50%; height: 60%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(101,84,192,0.2), transparent 60%);
+    filter: blur(60px);
+  }
+  .hero-content { position: relative; z-index: 1; width: 100%; }
+  .hero-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 80px; }
+  .logo-mark {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--brand-2), var(--accent));
+    box-shadow: 0 4px 20px rgba(0,101,255,0.4);
     display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 800; font-size: 22px;
+    font-weight: 900; font-size: 20px; color: white; letter-spacing: -0.02em;
   }
-  .brand h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
-  .brand .tag { font-size: 11px; color: var(--ink-300); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .card {
-    background: white; border: 1px solid var(--bg-40); border-radius: 8px;
-    padding: 20px 22px;
-  }
-  .card.wide { grid-column: 1 / -1; }
-  .section-label {
-    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--ink-100); margin-bottom: 8px;
-  }
-  h2 { font-size: 17px; font-weight: 700; color: var(--ink-900); margin-bottom: 10px; letter-spacing: -0.005em; }
-  h3 { font-size: 13px; font-weight: 700; color: var(--ink-700); margin: 10px 0 6px; }
-  p { font-size: 13.5px; color: var(--ink-500); }
-  ul { list-style: none; padding: 0; }
-  li { font-size: 13px; color: var(--ink-500); padding: 3px 0; display: flex; align-items: flex-start; gap: 8px; }
-  li::before { content: "▸"; color: var(--brand); font-weight: 700; flex-shrink: 0; }
-  .pill {
-    display: inline-block; font-size: 11px; font-weight: 600;
-    padding: 2px 8px; border-radius: 3px; margin-right: 4px;
-  }
-  .pill.blue { background: #deebff; color: var(--brand); }
-  .pill.green { background: #e3fcef; color: var(--success); }
-  .pill.orange { background: #fffae6; color: var(--warn); }
-  .pill.red { background: #ffebe6; color: var(--danger); }
-  .pill.purple { background: #eae6ff; color: var(--purple); }
+  .logo-text { font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .logo-sub { font-size: 10px; opacity: 0.5; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; margin-top: 2px; }
 
-  /* Problem/Policy in top row */
-  .problem-card { border-left: 4px solid var(--danger); }
-  .policy-card { border-left: 4px solid var(--brand); }
-  .aim-card { border-left: 4px solid var(--success); background: linear-gradient(135deg, #e3fcef, white); }
-  .stack-card { border-left: 4px solid var(--purple); }
-
-  .aim { font-size: 20px; font-weight: 700; color: var(--ink-900); line-height: 1.35; }
-  .aim em { color: var(--brand); font-style: normal; }
-  .aim-sub { font-size: 12px; color: var(--ink-300); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
-
-  /* Architecture diagram */
-  .arch {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
-    padding: 12px 0; align-items: stretch;
+  .hero h1 {
+    font-size: clamp(48px, 6vw, 84px); font-weight: 800; line-height: 1.02; letter-spacing: -0.03em;
+    max-width: 950px;
   }
-  .node {
-    background: white; border: 1.5px solid var(--bg-40); border-radius: 6px;
-    padding: 10px 12px; position: relative; text-align: center;
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--brand-glow), #b3d4ff);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .node .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-100); }
-  .node .name { font-size: 14px; font-weight: 700; color: var(--ink-900); margin-top: 2px; }
-  .node .sub { font-size: 11px; color: var(--ink-300); margin-top: 3px; line-height: 1.3; }
-  .node.frontend { background: linear-gradient(135deg, #deebff, white); border-color: var(--brand); }
-  .node.backend { background: linear-gradient(135deg, #e3fcef, white); border-color: var(--success); }
-  .node.db { background: linear-gradient(135deg, #eae6ff, white); border-color: var(--purple); }
-  .node.llm { background: linear-gradient(135deg, #fffae6, white); border-color: var(--warn); grid-column: 2; margin-top: 8px; }
-  .arrow-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -6px 0; font-size: 10px; color: var(--ink-100); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
-
-  .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin-top: 8px; }
-  .stack-item { font-size: 12px; color: var(--ink-500); padding: 4px 0; border-bottom: 1px dashed var(--bg-40); }
-  .stack-item strong { color: var(--ink-900); font-weight: 700; }
-
-  .features li { padding: 5px 0; font-size: 13.5px; }
-  .features li::before { content: "✓"; color: var(--success); }
-  .features li strong { color: var(--ink-900); font-weight: 600; margin-right: 4px; }
-
-  footer {
-    margin-top: 22px; text-align: center; font-size: 11px; color: var(--ink-100);
+  .hero .lede {
+    margin-top: 28px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6; max-width: 720px;
+    color: rgba(255,255,255,0.75); font-weight: 400;
   }
-  footer strong { color: var(--ink-500); }
+  .hero-stats { margin-top: 60px; display: flex; gap: 60px; flex-wrap: wrap; }
+  .stat .num { font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: -0.03em; background: linear-gradient(135deg, white, var(--brand-glow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-top: 8px; font-weight: 600; }
+  .scroll-hint {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 90px 0; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-header h2 {
+    font-size: clamp(32px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.02em;
+    margin-top: 8px; line-height: 1.15;
+  }
+  .section-header p { color: var(--muted); font-size: 17px; margin-top: 12px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+  /* Problem section */
+  .problem-section { background: white; }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .problem-card {
+    background: white; border: 1px solid var(--line); border-radius: 12px; padding: 32px 28px;
+    position: relative; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .problem-card .num-badge {
+    font-size: 12px; font-weight: 800; color: white; background: var(--danger);
+    padding: 4px 10px; border-radius: 100px; display: inline-block; letter-spacing: 0.05em;
+  }
+  .problem-card h3 { font-size: 22px; font-weight: 700; margin-top: 16px; line-height: 1.2; letter-spacing: -0.01em; }
+  .problem-card p { color: var(--muted); margin-top: 12px; font-size: 14.5px; }
+
+  /* Policy section */
+  .policy-section { background: linear-gradient(180deg, #f7f8fa, #eef1f5); }
+  .policy-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+  .policy-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .policy-fact {
+    background: white; border-radius: 10px; padding: 20px; border-left: 4px solid var(--brand);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .policy-fact .k { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .policy-fact .v { font-size: 20px; font-weight: 700; color: var(--ink); margin-top: 4px; line-height: 1.2; }
+  .policy-fact .v small { display: block; font-size: 12px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  .matrix-card {
+    background: white; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .matrix-card h4 { font-size: 14px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .matrix-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .matrix-row:last-child { border-bottom: 0; }
+  .matrix-tier {
+    font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 4px; min-width: 100px; text-align: center;
+  }
+  .tier-1 { background: #e3fcef; color: var(--success); }
+  .tier-2 { background: #deebff; color: var(--brand); }
+  .tier-3 { background: #fffae6; color: var(--warn); }
+  .tier-4 { background: #ffebe6; color: var(--danger); }
+  .matrix-desc { flex: 1; margin-left: 16px; font-size: 14px; color: var(--ink); font-weight: 500; }
+
+  /* Aim section */
+  .aim-section {
+    background: linear-gradient(135deg, #0a1428 0%, #1a2c5e 100%); color: white; position: relative; overflow: hidden;
+  }
+  .aim-section::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(76,154,255,0.15), transparent 60%);
+  }
+  .aim-content { position: relative; z-index: 1; text-align: center; }
+  .aim-content h2 {
+    font-size: clamp(36px, 4.5vw, 60px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
+    max-width: 900px; margin: 0 auto;
+  }
+  .aim-content h2 .a { color: #4c9aff; } .aim-content h2 .b { color: #b3d4ff; } .aim-content h2 .c { color: white; }
+  .aim-sub { margin-top: 24px; font-size: 18px; color: rgba(255,255,255,0.6); }
+
+  /* Features section */
+  .features-section { background: white; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feature {
+    padding: 24px; background: linear-gradient(135deg, #f7f8fa, white);
+    border: 1px solid var(--line); border-radius: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .feature:hover { transform: translateY(-2px); border-color: var(--brand); }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--brand-2), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 18px; font-weight: 700; margin-bottom: 16px;
+  }
+  .feature h4 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .feature p { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+
+  /* Architecture section */
+  .arch-section { background: linear-gradient(180deg, #eef1f5, #f7f8fa); }
+  .system-diagram {
+    background: white; border-radius: 20px; padding: 40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    overflow-x: auto;
+  }
+  .system-diagram svg {
+    display: block; width: 100%; height: auto; max-width: 1100px; margin: 0 auto;
+  }
+  .arch-diagram {
+    background: white; border-radius: 20px; padding: 60px 40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; align-items: center;
+    position: relative;
+  }
+  .arch-node {
+    background: white; border: 2px solid var(--line); border-radius: 14px; padding: 24px 20px;
+    text-align: center; position: relative; z-index: 2; transition: transform 0.2s;
+  }
+  .arch-node:hover { transform: scale(1.03); }
+  .arch-node.frontend { border-color: var(--brand); box-shadow: 0 8px 24px rgba(0,101,255,0.15); }
+  .arch-node.backend { border-color: var(--success); box-shadow: 0 8px 24px rgba(0,135,90,0.15); }
+  .arch-node.db { border-color: var(--accent); box-shadow: 0 8px 24px rgba(101,84,192,0.15); }
+  .arch-node .role { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
+  .arch-node .name { font-size: 22px; font-weight: 800; margin-top: 6px; letter-spacing: -0.01em; }
+  .arch-node .sub { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  .arch-node .host { font-size: 11px; font-weight: 700; margin-top: 12px; padding: 4px 10px; background: var(--bg); border-radius: 100px; display: inline-block; color: var(--ink); letter-spacing: 0.03em; }
+  .arch-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 20px; z-index: 1; font-weight: 800;
+  }
+  .arch-arrow.a1 { left: calc(33.33% - 10px); }
+  .arch-arrow.a2 { left: calc(66.66% - 10px); }
+  .arch-llm-wrap { margin-top: 32px; display: flex; justify-content: center; }
+  .arch-llm {
+    background: linear-gradient(135deg, #fff8e6, white); border: 2px dashed var(--warn); border-radius: 14px;
+    padding: 20px 32px; text-align: center; max-width: 500px;
+  }
+  .arch-llm .role { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--warn); }
+  .arch-llm .name { font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .arch-llm .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .arch-principle {
+    margin-top: 48px; padding: 32px; background: white; border-radius: 12px; border-left: 4px solid var(--accent);
+    font-size: 15px; color: var(--ink); line-height: 1.6;
+  }
+  .arch-principle strong { color: var(--accent); }
+  code { background: var(--bg); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; color: var(--ink); }
+
+  /* Stack section */
+  .stack-section { background: white; }
+  .stack-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+  .stack-row {
+    display: flex; align-items: baseline; gap: 20px; padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack-choice { min-width: 220px; }
+  .stack-choice .name { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .stack-choice .cat { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; color: var(--brand); margin-bottom: 4px; }
+  .stack-why { font-size: 14px; color: var(--muted); flex: 1; line-height: 1.55; }
+  .stack-why b { color: var(--ink); font-weight: 600; }
+
+  /* Footer / CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--brand), var(--accent)); color: white; padding: 80px 0;
+    text-align: center;
+  }
+  .cta-section h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.01em; }
+  .cta-section p { margin-top: 12px; font-size: 16px; color: rgba(255,255,255,0.8); }
+  .cta-links { margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta-link {
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+    padding: 12px 24px; border-radius: 8px; color: white; text-decoration: none;
+    font-size: 14px; font-weight: 600; border: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.2s;
+  }
+  .cta-link:hover { background: rgba(255,255,255,0.25); }
+
+  @media (max-width: 900px) {
+    .problem-grid, .features-grid, .arch-diagram, .policy-grid, .stack-grid { grid-template-columns: 1fr; }
+    .arch-arrow { display: none; }
+  }
 </style>
 </head>
 <body>
-<div class="stage">
 
-  <header>
-    <div class="logo">R</div>
-    <div class="brand">
-      <h1>Reimburse</h1>
-      <div class="tag">Take-home for AI Planet · Nortex Industries brief</div>
-    </div>
-  </header>
-
-  <div class="grid">
-
-    <!-- PROBLEM -->
-    <div class="card problem-card">
-      <div class="section-label">The problem</div>
-      <h2>Every travelling employee loses 25–30 minutes per trip to a paper-form ritual</h2>
-      <p style="margin-top:6px">Chaitanya returns from a Bengaluru trip. His inbox has 15 emails: Uber receipts, a hotel folio, a duplicate resend, a colleague's expense forwarded to him, a promo, a payment failure notice, a flight ticket paid by the company card. He opens a blank Excel form and manually assembles a claim. Then chases Finance for 2 weeks.</p>
-      <ul style="margin-top:10px">
-        <li>Manual assembly from a messy inbox — <strong style="color:var(--ink-900)">the 25 minutes</strong></li>
-        <li>Errors leak through — non-reimbursables get claimed, duplicates get paid</li>
-        <li>Silent workflow — nobody knows where the money is until it arrives</li>
-      </ul>
-    </div>
-
-    <!-- POLICY -->
-    <div class="card policy-card">
-      <div class="section-label">The policy the app must enforce</div>
-      <h2>NTX-HR-POL-11 Rev 4 · effective 01 Apr 2026</h2>
-      <div style="margin-top:8px; display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:12.5px">
-        <div><strong>Lodging</strong> — Tier‑1 ₹6k / Tier‑2 ₹4k / Tier‑3 ₹2.8k per night</div>
-        <div><strong>Meals</strong> — Tier‑1 ₹1.5k / others ₹1k per day</div>
-        <div><strong>Advance</strong> — up to <strong style="color:var(--danger)">60% cap</strong> of estimated cost</div>
-        <div><strong>Business meals</strong> — <strong>&gt;₹2k needs HoD approval</strong></div>
-        <div style="grid-column:1/-1; margin-top:4px"><strong>Non‑reimbursable</strong> — laundry, mini‑bar, spa, gym, alcohol, personal phone, fines, insurance</div>
-      </div>
-      <h3 style="margin-top:12px">Approval matrix (by amount)</h3>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:2px 12px; font-size:12px; margin-top:4px">
-        <div><span class="pill green">≤ ₹25k</span></div><div style="color:var(--ink-500)">Reporting Manager</div>
-        <div><span class="pill blue">₹25k–75k</span></div><div style="color:var(--ink-500)">Manager + HoD</div>
-        <div><span class="pill orange">₹75k–2L</span></div><div style="color:var(--ink-500)">Manager + HoD + Division Head</div>
-        <div><span class="pill red">&gt; ₹2L / intl</span></div><div style="color:var(--ink-500)">Manager + HoD + Div Head + MD/CEO</div>
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-nav">
+      <div class="logo-mark">R</div>
+      <div>
+        <div class="logo-text">Reimburse</div>
+        <div class="logo-sub">Take-home · AI Planet · Nortex Industries</div>
       </div>
     </div>
 
-    <!-- PRIMARY AIM -->
-    <div class="card aim-card wide">
-      <div class="section-label">Primary aim</div>
-      <div class="aim">
-        Remove the 25 minutes. Enforce the policy automatically. Give every rupee a live audit trail — from advance disbursement to final settlement, visible to everyone who needs it.
-      </div>
-      <div class="aim-sub">Build for the messy inbox, not a cleaner form.</div>
-    </div>
+    <h1>
+      Employees lose <span class="accent">25 minutes</span><br>
+      to a paper form after every trip.<br>
+      Let's give it back.
+    </h1>
 
-    <!-- FEATURES -->
-    <div class="card wide">
-      <div class="section-label">Must-have features</div>
-      <h2>What the app does end-to-end</h2>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px 24px; margin-top:8px">
-        <ul class="features">
-          <li><strong>Import from Inbox</strong> — parses .eml files, filters noise, splits hotel folios</li>
-          <li><strong>Deterministic parsers</strong> for Uber, MakeMyTrip, hotel invoices</li>
-          <li><strong>LLM fallback</strong> via OpenRouter for unknown senders</li>
-          <li><strong>Policy engine</strong> — lodging caps + non-reimbursables at save-time</li>
-          <li><strong>Two-stage approval</strong> — TR pre-trip, Claim post-trip</li>
-          <li><strong>Tiered approvals</strong> per policy §2 (Manager → HoD → Div → MD)</li>
-        </ul>
-        <ul class="features">
-          <li><strong>AI Verification Assistant</strong> — advisor for approvers, never auto-decides</li>
-          <li><strong>Employee Context panel</strong> — past history, plan-vs-actual for reviewers</li>
-          <li><strong>Advance disbursement audit</strong> as a distinct Finance sub-tree</li>
-          <li><strong>Finance ↔ Employee thread</strong> when an advance is held</li>
-          <li><strong>Proof document viewer</strong> — inline .png / .pdf / .eml rendering</li>
-          <li><strong>Admin oversight</strong> — policy view, org tree, system stats</li>
-        </ul>
+    <p class="lede">
+      Built against the Nortex Industries brief. The pack shipped with 15 real emails from one trip —
+      Uber receipts, a hotel folio with mixed non-reimbursables, a colleague's expense forwarded to
+      the wrong inbox, a payment failure, a promo. That messiness IS the specification.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="num">25min</div>
+        <div class="label">Time lost per trip</div>
+      </div>
+      <div class="stat">
+        <div class="num">15</div>
+        <div class="label">Emails to reconcile</div>
+      </div>
+      <div class="stat">
+        <div class="num">2 weeks</div>
+        <div class="label">Follow-ups to Finance</div>
+      </div>
+      <div class="stat">
+        <div class="num">4-tier</div>
+        <div class="label">Approval matrix</div>
       </div>
     </div>
-
-    <!-- ARCHITECTURE -->
-    <div class="card wide">
-      <div class="section-label">Architecture</div>
-      <h2>System overview</h2>
-      <div class="arch">
-        <div class="node frontend">
-          <div class="label">Client</div>
-          <div class="name">React SPA</div>
-          <div class="sub">Tailwind · Inter font · role-scoped dashboards<br>Deployed on Vercel</div>
-        </div>
-        <div class="node backend">
-          <div class="label">API</div>
-          <div class="name">Django + DRF</div>
-          <div class="sub">Token auth · role-scoped querysets<br>Deployed on Railway (gunicorn + whitenoise)</div>
-        </div>
-        <div class="node db">
-          <div class="label">Data</div>
-          <div class="name">PostgreSQL</div>
-          <div class="sub">SQLite in dev · switch via DATABASE_URL<br>Managed on Railway</div>
-        </div>
-      </div>
-      <div class="arrow-row">← REST JSON over HTTPS →   ·   ORM →</div>
-      <div class="arch" style="grid-template-columns:1fr">
-        <div class="node llm" style="grid-column:1; margin-top:0">
-          <div class="label">AI integration</div>
-          <div class="name">OpenRouter (multi-model)</div>
-          <div class="sub">DeepSeek V4 Flash primary · openrouter/free fallback · rule-based fallback if LLM down</div>
-        </div>
-      </div>
-      <p style="margin-top:12px; font-size:12.5px">
-        <strong style="color:var(--ink-900)">Design principle:</strong> the shape of the code mirrors product thinking.
-        <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">core/parsers.py</code> is a first-class file (not buried in <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">utils/</code>) because reading the inbox <em>is</em> the product.
-        <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">core/llm.py</code> is separate from <code style="background:var(--bg-20); padding:1px 4px; border-radius:3px">views.py</code> because AI is an integration, not the core.
-      </p>
-    </div>
-
-    <!-- TECH STACK -->
-    <div class="card stack-card wide">
-      <div class="section-label">Tech stack & why over the alternatives</div>
-      <div class="stack-grid">
-        <div class="stack-item"><strong>Django + DRF</strong> — fastest way to expose a domain with role-based permissions. <span style="color:var(--ink-300)">Not Node/Express: DRF's viewsets + queryset-level RBAC compress a week of Node scaffolding into a day.</span></div>
-        <div class="stack-item"><strong>React + Tailwind</strong> — component reuse, dense enterprise UI. <span style="color:var(--ink-300)">Not Next.js: no SSR needed; this is an internal tool, not a public site.</span></div>
-        <div class="stack-item"><strong>OpenRouter (LLM)</strong> — multi-model with fallback. <span style="color:var(--ink-300)">Not direct OpenAI/Anthropic SDK: OpenRouter lets me swap models without code changes.</span></div>
-        <div class="stack-item"><strong>PostgreSQL via DATABASE_URL</strong> — one-line dev-to-prod switch. <span style="color:var(--ink-300)">Not MongoDB: this is relational — approvals, hierarchies, joins.</span></div>
-        <div class="stack-item"><strong>Token auth (DRF)</strong> — bearer tokens, no CSRF/session complexity. <span style="color:var(--ink-300)">Not JWT: overkill; DRF's built-in Token is enough.</span></div>
-        <div class="stack-item"><strong>Inter font · Atlassian palette</strong> — financial-grade tabular numerals. <span style="color:var(--ink-300)">Not Material/Bootstrap: they feel like consumer apps, not enterprise SaaS.</span></div>
-        <div class="stack-item"><strong>Railway (backend)</strong> — auto-detects Django + Postgres. <span style="color:var(--ink-300)">Not AWS/Heroku: 30-min deploy from GitHub with zero YAML.</span></div>
-        <div class="stack-item"><strong>Vercel (frontend)</strong> — auto rebuilds on push. <span style="color:var(--ink-300)">Not Netlify: identical DX, Vercel just felt smoother for CRA.</span></div>
-      </div>
-    </div>
-
   </div>
+  <div class="scroll-hint">Scroll · The build ↓</div>
+</section>
 
-  <footer>
-    Live: <strong>reimburse-frontend-eta.vercel.app</strong> · Backend: <strong>reimburse-backend-production.up.railway.app</strong><br>
-    Repos on GitHub: <strong>Naga-Balaji/reimburse-backend</strong> · <strong>Naga-Balaji/reimburse-frontend</strong>
-  </footer>
 
-</div>
+<!-- ══════════ PROBLEM ══════════ -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">The problem</div>
+      <h2>Three pains, one messy inbox.</h2>
+      <p>The problem statement gave me the pain points. The pack gave me the actual data.</p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="num-badge">PAIN 01</div>
+        <h3>Manual assembly from chaos.</h3>
+        <p>Uber receipts, a hotel folio with laundry mixed in, a colleague's expense forwarded to your inbox by accident, a duplicate resend of the same trip. Employees stitch this into a 50-field Excel form. Every time.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num-badge">PAIN 02</div>
+        <h3>Errors leak through.</h3>
+        <p>Non-reimbursables get claimed. Duplicates get paid. Policy limits get missed. The paper form doesn't know Bengaluru is a Tier-1 city or that laundry isn't reimbursable — the human filling it has to remember.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num-badge">PAIN 03</div>
+        <h3>Silent workflow.</h3>
+        <p>The employee submits, then chases Finance for two weeks. Manager doesn't know it's stuck. Finance doesn't know the employee is waiting. Nobody sees the audit trail — because there isn't one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ POLICY ══════════ -->
+<section class="policy-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">The rulebook</div>
+      <h2>NTX-HR-POL-11 · Rev 4</h2>
+      <p>Every check the app enforces automatically comes from this policy document.</p>
+    </div>
+
+    <div class="policy-grid">
+      <div class="policy-facts">
+        <div class="policy-fact">
+          <div class="k">Lodging</div>
+          <div class="v">₹6,000/night<small>Tier-1 · Bengaluru, Mumbai, Delhi, Hyderabad, Chennai, Pune, Kolkata</small></div>
+        </div>
+        <div class="policy-fact">
+          <div class="k">Meals</div>
+          <div class="v">₹1,500/day<small>Tier-1 · Bills required above ₹500</small></div>
+        </div>
+        <div class="policy-fact">
+          <div class="k">Advance cap</div>
+          <div class="v">60%<small>Of estimated employee-borne cost</small></div>
+        </div>
+        <div class="policy-fact">
+          <div class="k">Business meals</div>
+          <div class="v">₹2,000<small>Threshold requiring HoD prior approval</small></div>
+        </div>
+        <div class="policy-fact" style="grid-column:1/-1; border-left-color:var(--danger)">
+          <div class="k">Non-reimbursable — automatically excluded</div>
+          <div class="v" style="font-size:14px; font-weight:500; line-height:1.5">Laundry · Mini-bar · In-room dining · Spa · Gym · Personal phone/data · Alcohol · Fines · Travel insurance · Expenses by anyone other than the claimant</div>
+        </div>
+      </div>
+
+      <div class="matrix-card">
+        <h4>Approval Matrix</h4>
+        <div class="matrix-row">
+          <span class="matrix-tier tier-1">≤ ₹25k</span>
+          <div class="matrix-desc">Reporting Manager only</div>
+        </div>
+        <div class="matrix-row">
+          <span class="matrix-tier tier-2">₹25k–75k</span>
+          <div class="matrix-desc">Manager + Head of Department</div>
+        </div>
+        <div class="matrix-row">
+          <span class="matrix-tier tier-3">₹75k–2L</span>
+          <div class="matrix-desc">Manager + HoD + Head of Division</div>
+        </div>
+        <div class="matrix-row">
+          <span class="matrix-tier tier-4">&gt; ₹2L</span>
+          <div class="matrix-desc">All above + MD/CEO</div>
+        </div>
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); font-style:italic; line-height:1.6">
+          Every claim needs Finance verification. An approver cannot approve their own claim — that level is skipped.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ THE AIM ══════════ -->
+<section class="aim-section">
+  <div class="container aim-content">
+    <div class="eyebrow-light" style="margin-bottom:20px">The primary aim</div>
+    <h2>
+      <span class="c">Remove the 25 minutes.</span><br>
+      <span class="a">Enforce policy automatically.</span><br>
+      <span class="b">Give every rupee a live audit trail.</span>
+    </h2>
+    <p class="aim-sub">Build for the messy inbox — not a prettier form.</p>
+  </div>
+</section>
+
+
+<!-- ══════════ FEATURES ══════════ -->
+<section class="features-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">What the app does</div>
+      <h2>Twelve features that make it real.</h2>
+      <p>Every one maps to a specific line in the problem statement or the policy.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">📥</div>
+        <h4>Import from Inbox</h4>
+        <p>Upload .eml files → deterministic parsers extract Uber, hotel, dinner receipts in seconds.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤖</div>
+        <h4>LLM fallback</h4>
+        <p>Unknown senders? OpenRouter (Claude/DeepSeek) picks up the slack, opt-in on the import screen.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚫</div>
+        <h4>Noise filtering</h4>
+        <p>Duplicates, colleague forwards, promo emails, payment failures — auto-detected and excluded.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚖️</div>
+        <h4>Policy engine</h4>
+        <p>Lodging tier caps and non-reimbursable splitting enforced at save-time. Silent drops? Never.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔀</div>
+        <h4>Two-stage approval</h4>
+        <p>Travel Request pre-trip. Expense Claim post-trip. Different reviewers, different jobs.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🪜</div>
+        <h4>Tiered approvals</h4>
+        <p>Amount decides the chain. Manager → HoD → Division → MD escalates automatically.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🧠</div>
+        <h4>AI Verification Assistant</h4>
+        <p>Recommends approve/return/reject with 87% confidence. Never auto-decides. Advisor, not autopilot.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h4>Employee Context</h4>
+        <p>Past history, spending patterns, plan-vs-actual variance — the manager doesn't decide in a vacuum.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <h4>Advance audit track</h4>
+        <p>Disbursement is a distinct Finance event with its own reference. Sub-tree under the main workflow.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h4>Finance ↔ Employee thread</h4>
+        <p>Advance on hold? Finance leaves a reason. Employee replies with clarification. Full audit trail.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📎</div>
+        <h4>Proof viewer</h4>
+        <p>Native inline rendering for .png, .pdf, .eml. Approvers verify with their own eyes, not blind trust.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h4>Admin oversight</h4>
+        <p>Policy view, org tree, system-wide stats. Oversight, not operations — no approve buttons.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ ARCHITECTURE ══════════ -->
+<section class="arch-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">System architecture</div>
+      <h2>Three services. One story.</h2>
+      <p>Client. API. Database. Plus one AI integration — as a safety net, not the core.</p>
+    </div>
+
+    <div class="system-diagram">
+      <svg viewBox="0 0 1100 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="System architecture diagram">
+        <defs>
+          <!-- Gradients -->
+          <linearGradient id="gClient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#deebff"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="gApi" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e3fcef"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="gDb" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#eae6ff"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="gLlm" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff8e6"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="gUser" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f4f5f7"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+
+          <!-- Arrowheads -->
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#6b778c"/>
+          </marker>
+          <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#0065ff"/>
+          </marker>
+          <marker id="arrow-warn" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#ff8b00"/>
+          </marker>
+
+          <!-- Filter for soft shadow -->
+          <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="4" result="offsetblur"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.15"/></feComponentTransfer>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- ═══ TIER 1: USERS ═══ -->
+        <text x="30" y="30" font-family="Inter" font-size="11" font-weight="800" fill="#6b778c" letter-spacing="1.5">USERS</text>
+        <line x1="30" y1="40" x2="1070" y2="40" stroke="#dfe1e6" stroke-width="1" stroke-dasharray="4,4"/>
+
+        <!-- 5 role avatars -->
+        <g transform="translate(50, 60)">
+          <circle cx="35" cy="35" r="26" fill="url(#gUser)" stroke="#6b778c" stroke-width="1.5"/>
+          <text x="35" y="42" font-family="Inter" font-size="18" font-weight="700" text-anchor="middle" fill="#172b4d">👤</text>
+          <text x="35" y="90" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="#172b4d">Employee</text>
+          <text x="35" y="103" font-family="Inter" font-size="9" text-anchor="middle" fill="#6b778c">chaitanya</text>
+        </g>
+        <g transform="translate(240, 60)">
+          <circle cx="35" cy="35" r="26" fill="url(#gUser)" stroke="#0065ff" stroke-width="1.5"/>
+          <text x="35" y="42" font-family="Inter" font-size="18" font-weight="700" text-anchor="middle" fill="#0052cc">👔</text>
+          <text x="35" y="90" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="#172b4d">Manager</text>
+          <text x="35" y="103" font-family="Inter" font-size="9" text-anchor="middle" fill="#6b778c">suresh</text>
+        </g>
+        <g transform="translate(430, 60)">
+          <circle cx="35" cy="35" r="26" fill="url(#gUser)" stroke="#0065ff" stroke-width="1.5"/>
+          <text x="35" y="42" font-family="Inter" font-size="18" font-weight="700" text-anchor="middle" fill="#0052cc">🎩</text>
+          <text x="35" y="90" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="#172b4d">HoD / Div / MD</text>
+          <text x="35" y="103" font-family="Inter" font-size="9" text-anchor="middle" fill="#6b778c">meera · arvind · nandita</text>
+        </g>
+        <g transform="translate(660, 60)">
+          <circle cx="35" cy="35" r="26" fill="url(#gUser)" stroke="#00875a" stroke-width="1.5"/>
+          <text x="35" y="42" font-family="Inter" font-size="18" font-weight="700" text-anchor="middle" fill="#00875a">💰</text>
+          <text x="35" y="90" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="#172b4d">Finance</text>
+          <text x="35" y="103" font-family="Inter" font-size="9" text-anchor="middle" fill="#6b778c">ravi</text>
+        </g>
+        <g transform="translate(870, 60)">
+          <circle cx="35" cy="35" r="26" fill="url(#gUser)" stroke="#5243aa" stroke-width="1.5"/>
+          <text x="35" y="42" font-family="Inter" font-size="18" font-weight="700" text-anchor="middle" fill="#5243aa">🛡️</text>
+          <text x="35" y="90" font-family="Inter" font-size="11" font-weight="700" text-anchor="middle" fill="#172b4d">Admin</text>
+          <text x="35" y="103" font-family="Inter" font-size="9" text-anchor="middle" fill="#6b778c">nandita (MD)</text>
+        </g>
+
+        <!-- Down arrows from users to client -->
+        <line x1="85" y1="180" x2="85" y2="230" stroke="#6b778c" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+        <line x1="275" y1="180" x2="275" y2="230" stroke="#6b778c" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+        <line x1="465" y1="180" x2="465" y2="230" stroke="#6b778c" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+        <line x1="695" y1="180" x2="695" y2="230" stroke="#6b778c" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+        <line x1="905" y1="180" x2="905" y2="230" stroke="#6b778c" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="3,3"/>
+
+        <!-- ═══ TIER 2: CLIENT ═══ -->
+        <text x="30" y="215" font-family="Inter" font-size="11" font-weight="800" fill="#6b778c" letter-spacing="1.5">CLIENT LAYER</text>
+        <rect x="60" y="230" width="980" height="130" rx="14" fill="url(#gClient)" stroke="#0065ff" stroke-width="2" filter="url(#shadow)"/>
+        <text x="90" y="260" font-family="Inter" font-size="11" font-weight="800" fill="#0052cc" letter-spacing="1.2">▲ VERCEL · REACT SPA</text>
+        <text x="90" y="290" font-family="Inter" font-size="24" font-weight="800" fill="#172b4d">Reimburse Frontend</text>
+
+        <!-- Sub-modules inside client -->
+        <g transform="translate(90, 310)">
+          <rect x="0" y="0" width="150" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">🎭 Role Dashboards</text>
+        </g>
+        <g transform="translate(250, 310)">
+          <rect x="0" y="0" width="150" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">📥 Import Inbox</text>
+        </g>
+        <g transform="translate(410, 310)">
+          <rect x="0" y="0" width="150" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">📎 Proof Viewer</text>
+        </g>
+        <g transform="translate(570, 310)">
+          <rect x="0" y="0" width="160" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">🧠 AI Insights Panel</text>
+        </g>
+        <g transform="translate(740, 310)">
+          <rect x="0" y="0" width="150" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">💰 Advance Review</text>
+        </g>
+        <g transform="translate(900, 310)">
+          <rect x="0" y="0" width="130" height="34" rx="6" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="21" font-family="Inter" font-size="11" font-weight="600" fill="#172b4d">🛡️ Admin</text>
+        </g>
+
+        <!-- Down arrow to API -->
+        <line x1="550" y1="360" x2="550" y2="410" stroke="#0065ff" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+        <text x="565" y="390" font-family="Inter" font-size="11" font-weight="700" fill="#0052cc">REST / JSON · Bearer Token · HTTPS</text>
+
+        <!-- ═══ TIER 3: API ═══ -->
+        <text x="30" y="395" font-family="Inter" font-size="11" font-weight="800" fill="#6b778c" letter-spacing="1.5">API LAYER</text>
+        <rect x="60" y="410" width="980" height="150" rx="14" fill="url(#gApi)" stroke="#00875a" stroke-width="2" filter="url(#shadow)"/>
+        <text x="90" y="440" font-family="Inter" font-size="11" font-weight="800" fill="#00875a" letter-spacing="1.2">🚂 RAILWAY · DJANGO + DRF</text>
+        <text x="90" y="470" font-family="Inter" font-size="24" font-weight="800" fill="#172b4d">Reimburse Backend</text>
+
+        <!-- Sub-modules inside API -->
+        <g transform="translate(90, 490)">
+          <rect x="0" y="0" width="145" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">core/views.py</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">Viewsets</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">RBAC · workflow</text>
+        </g>
+        <g transform="translate(245, 490)">
+          <rect x="0" y="0" width="145" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">core/models.py</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">6 tables</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">Policy engine</text>
+        </g>
+        <g transform="translate(400, 490)">
+          <rect x="0" y="0" width="145" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">core/parsers.py</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">.eml → structured</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">Noise / dupe filter</text>
+        </g>
+        <g transform="translate(555, 490)">
+          <rect x="0" y="0" width="145" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">core/llm.py</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">OpenRouter client</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">+ rule fallback</text>
+        </g>
+        <g transform="translate(710, 490)">
+          <rect x="0" y="0" width="145" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">core/serializers</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">Computed totals</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">Nested detail</text>
+        </g>
+        <g transform="translate(865, 490)">
+          <rect x="0" y="0" width="165" height="60" rx="8" fill="white" stroke="#dfe1e6" stroke-width="1"/>
+          <text x="10" y="22" font-family="Inter" font-size="11" font-weight="800" fill="#00875a">Auth / Media</text>
+          <text x="10" y="38" font-family="Inter" font-size="10" fill="#6b778c">DRF Token</text>
+          <text x="10" y="52" font-family="Inter" font-size="10" fill="#6b778c">WhiteNoise · MEDIA_URL</text>
+        </g>
+
+        <!-- Down arrow to DB -->
+        <line x1="350" y1="560" x2="350" y2="620" stroke="#5243aa" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <text x="365" y="595" font-family="Inter" font-size="11" font-weight="700" fill="#5243aa">Django ORM</text>
+
+        <!-- Right arrow to LLM (curves out) -->
+        <path d="M 700 560 Q 900 610 900 620" stroke="#ff8b00" stroke-width="2.5" fill="none" marker-end="url(#arrow-warn)"/>
+        <text x="740" y="610" font-family="Inter" font-size="11" font-weight="700" fill="#ff8b00">HTTPS · fallback</text>
+
+        <!-- ═══ TIER 4: DATA + AI ═══ -->
+        <text x="30" y="605" font-family="Inter" font-size="11" font-weight="800" fill="#6b778c" letter-spacing="1.5">DATA + AI LAYER</text>
+
+        <!-- Postgres -->
+        <rect x="60" y="620" width="580" height="90" rx="14" fill="url(#gDb)" stroke="#5243aa" stroke-width="2" filter="url(#shadow)"/>
+        <text x="90" y="650" font-family="Inter" font-size="11" font-weight="800" fill="#5243aa" letter-spacing="1.2">🚂 RAILWAY · POSTGRESQL</text>
+        <text x="90" y="680" font-family="Inter" font-size="19" font-weight="800" fill="#172b4d">Reimburse DB</text>
+        <text x="90" y="700" font-family="Inter" font-size="12" fill="#6b778c">UserProfile · TravelRequest · TRApproval · ExpenseClaim · ExpenseItem · Approval</text>
+
+        <!-- OpenRouter -->
+        <rect x="660" y="620" width="380" height="90" rx="14" fill="url(#gLlm)" stroke="#ff8b00" stroke-width="2" stroke-dasharray="6,4" filter="url(#shadow)"/>
+        <text x="690" y="650" font-family="Inter" font-size="11" font-weight="800" fill="#ff8b00" letter-spacing="1.2">🤖 OPENROUTER · MULTI-MODEL</text>
+        <text x="690" y="680" font-family="Inter" font-size="19" font-weight="800" fill="#172b4d">AI Advisor</text>
+        <text x="690" y="700" font-family="Inter" font-size="12" fill="#6b778c">DeepSeek V4 Flash · rule-based fallback if down</text>
+      </svg>
+    </div>
+
+    <div class="arch-principle">
+      <strong>Design principle:</strong> the shape of the code mirrors product thinking.
+      <code>core/parsers.py</code> is a first-class file (not buried in <code>utils/</code>) because reading the inbox <em>is</em> the product.
+      <code>core/llm.py</code> is separated from <code>views.py</code> because AI is an integration, not the core.
+      If the LLM is down, the app still works.
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ TECH STACK ══════════ -->
+<section class="stack-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Why this stack</div>
+      <h2>Every choice has an alternative I rejected.</h2>
+      <p>Not "what's popular" — what's fastest to build the right thing.</p>
+    </div>
+
+    <div class="stack-grid">
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Backend</div>
+          <div class="name">Django + DRF</div>
+        </div>
+        <div class="stack-why"><b>Not Node/Express</b> — DRF's viewsets + queryset-level RBAC compress a week of Node scaffolding into a day. Model changes → migrations → API in minutes.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Frontend</div>
+          <div class="name">React + Tailwind</div>
+        </div>
+        <div class="stack-why"><b>Not Next.js</b> — no SSR needed; this is an internal tool. <b>Not MUI/Bootstrap</b> — they feel like consumer apps, not enterprise SaaS.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">LLM</div>
+          <div class="name">OpenRouter</div>
+        </div>
+        <div class="stack-why"><b>Not the OpenAI/Anthropic SDK directly</b> — OpenRouter lets me swap models with an env var, no code change. And it's cheaper.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Database</div>
+          <div class="name">PostgreSQL</div>
+        </div>
+        <div class="stack-why"><b>Not MongoDB</b> — the domain is relational (users, approvals, hierarchies, joins). Django's ORM + Postgres is the friction-free path.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Auth</div>
+          <div class="name">DRF Token</div>
+        </div>
+        <div class="stack-why"><b>Not JWT</b> — overkill for a single-frontend deploy. DRF's built-in Token auth is one line and works everywhere.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Typography</div>
+          <div class="name">Inter + tabular numerals</div>
+        </div>
+        <div class="stack-why"><b>Not the system font</b> — financial apps need aligned digits. <code>font-feature-settings: 'tnum'</code> makes ₹ amounts scan cleanly.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Backend host</div>
+          <div class="name">Railway</div>
+        </div>
+        <div class="stack-why"><b>Not AWS/Heroku</b> — 30-minute deploy from GitHub, auto-provisions Postgres, zero YAML. Ideal for a demo I want a reviewer to actually click.</div>
+      </div>
+
+      <div class="stack-row">
+        <div class="stack-choice">
+          <div class="cat">Frontend host</div>
+          <div class="name">Vercel</div>
+        </div>
+        <div class="stack-why"><b>Not Netlify</b> — near-identical DX. Vercel just felt smoother for Create React App. Auto rebuilds on git push.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Live and shipping.</h2>
+    <p>Not a wireframe. Not a mock. A real, deployed, running system.</p>
+    <div class="cta-links">
+      <a class="cta-link" href="https://reimburse-frontend-eta.vercel.app" target="_blank">Live app →</a>
+      <a class="cta-link" href="https://reimburse-backend-production.up.railway.app/admin/" target="_blank">Backend admin →</a>
+      <a class="cta-link" href="https://github.com/Naga-Balaji/reimburse-backend" target="_blank">Backend repo →</a>
+      <a class="cta-link" href="https://github.com/Naga-Balaji/reimburse-frontend" target="_blank">Frontend repo →</a>
+    </div>
+    <p style="margin-top:32px; font-size:12px; opacity:0.6">Now let me show you the app.</p>
+  </div>
+</section>
+
 </body>
 </html>
