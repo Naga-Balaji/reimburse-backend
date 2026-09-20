@@ -86,6 +86,12 @@ Not the other way around. The pack has 15 emails from known senders (Uber, MakeM
 - **Actual disbursement integration** — no NEFT/UPI hook
 - **Audit trail beyond approvals** — approval records are stamped with approver, decision, remarks, timestamp; a full activity log per claim would be additional
 
+## Known debt (honest)
+
+- **Frontend has ~10 unused-import ESLint warnings** across a few components (Login, PolicyView, TravelRequestDetail, TravelRequests). Vercel is deployed with `CI=false` to skip strict warnings-as-errors. Cleanup is trivial (delete unused imports) — I chose to ship the demo first. Would fix with `npx eslint --fix src/` + add husky + lint-staged for pre-commit hooks in a real product.
+- No test suite (`pytest` for the DRF viewsets + `jest` for React components). Would be my day-1 addition once the API surface stabilises.
+- Hardcoded strings that should be constants: Tier-1 city list, LLM prompt templates, timeout thresholds. Fine for a first cut; extract to a config module before onboarding a second engineer.
+
 ## Where it breaks
 
 - **Free-tier LLM rate limits** — the primary and fallback models can both hit 429. The rule-based fallback then runs and produces sensible analysis. Adding an Anthropic key would remove this entirely (my `core/llm.py` supports any OpenRouter model via `OPENROUTER_MODEL`).
