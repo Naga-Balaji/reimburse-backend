@@ -6,7 +6,10 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
 from django.contrib.auth.models import User
-from core.models import UserProfile, TravelRequest, ExpenseClaim, ExpenseItem, Approval
+from core.models import UserProfile, TravelRequest, TRApproval, ExpenseClaim, ExpenseItem, Approval
+from core.views import _tr_required_levels
+from django.utils import timezone
+from datetime import datetime
 
 # Delete existing data
 print("Clearing existing data...")
@@ -77,6 +80,27 @@ tr3 = TravelRequest.objects.create(
     status='pending'
 )
 
+# ─────────────────────────────────────────────
+# Backfill TRApproval chain for every TR (mirrors what perform_create does via API)
+# For approved TRs, all levels are already approved. For pending TRs, first level
+# is 'pending', later levels wait.
+# ─────────────────────────────────────────────
+def backfill_tr_approvals(tr, approver_by_level=None, mark_approved=False):
+    levels = _tr_required_levels(float(tr.estimated_cost))
+    for lvl in levels:
+        appr, _ = TRApproval.objects.get_or_create(travel_request=tr, level=lvl)
+        if mark_approved:
+            appr.decision = 'approved'
+            appr.approver = (approver_by_level or {}).get(lvl)
+            appr.remarks = 'Approved (seeded)'
+            appr.decided_at = timezone.now()
+            appr.save()
+
+approver_map = {'manager': manager, 'dept_head': dept_head, 'div_head': div_head, 'md_ceo': md}
+backfill_tr_approvals(tr1, approver_map, mark_approved=True)   # Bengaluru already approved
+backfill_tr_approvals(tr2)                                      # Mumbai pending
+backfill_tr_approvals(tr3)                                      # Chennai pending
+
 print(f"✓ Created 3 travel requests (1 approved, 2 pending)")
 
 # Create expense claim for TR-1
@@ -146,6 +170,8 @@ for dest, from_d, to_d, est, adv, items in past_trips:
         advance_disbursed_by=finance,
         advance_disbursement_ref=f'ADV/2026/{100 + past_trips.index((dest, from_d, to_d, est, adv, items)):04d}',
     )
+    # Also backfill TRApproval chain for the historical (already-approved) TR
+    backfill_tr_approvals(past_tr, approver_map, mark_approved=True)
     past_claim = ExpenseClaim.objects.create(
         travel_request=past_tr, employee=employee, status='paid',
         submitted_at=timezone.make_aware(datetime.combine(to_d + timedelta(days=1), datetime.min.time().replace(hour=14))),
